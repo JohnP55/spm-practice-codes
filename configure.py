@@ -67,10 +67,10 @@ MACHDEP = ' '.join([
     "-mcpu=750", # Set CPU to 750cl
     "-meabi", # Set ppc abi to eabi
     "-mhard-float", # Enable hardware floats
-    "-nostdlib", # Don't link std lib
+    # "-nostdlib", # Don't link std lib
     "-mregnames", # Enable r prefix for registers in asm
-    "-nostdinc", # Disable including std lib headers
-    "-ffreestanding", # Tell compiler environment isn't hosted
+    # "-nostdinc", # Disable including std lib headers
+    # "-ffreestanding", # Tell compiler environment isn't hosted
 ])
 
 # Base C flags
@@ -111,6 +111,14 @@ ASFLAGS = ' '.join([
 LDFLAGS = ' '.join([
     "$machdep",
 
+    # sysbase
+    # stdc++
+    # supc++
+
+    "-lstdc++",
+    "-lm",
+    "-lc",
+    "-lsysbase",
     "-lgcc",
     "-r", # Partially link (elf2rel finishes)
     "-e _prolog", # Set entry to _prolog

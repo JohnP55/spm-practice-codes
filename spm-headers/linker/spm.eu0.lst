@@ -8,11 +8,6 @@
 /* Dol */
 
 
-// Runtime.PPCEABI.H.a
-// __mem.c
-80004000:memcpy
-80004104:memset
-
 // mapdata.c
 // text
 800294e0:mapDataPtr
@@ -639,39 +634,6 @@
 8036afc0:pitText
 // more
 
-// Runtime.PPCEABI.H.a
-// runtime.c
-802560a4:__div2i
-// more
-
-// MSL_C.PPCEABI.bare.H.a
-// printf.c
-8025cf40:vsprintf
-8025cfc0:snprintf
-8025d098:sprintf
-// scanf.c
-8025e784:sscanf
-// string.c
-8025ec04:strstr
-// more
-
-// string.c
-8025a874:memmove
-8025e8fc:strcpy
-8025e9bc:strncpy
-8025ea00:strcat
-8025ea78:strcmp
-8025eb94:strncmp
-8025ebd4:strchr
-80267018:strlen
-// more
-
-// s_cos.c
-80263ea0:cos
-
-// s_sin.c
-802642ac:sin
-
 // os.a
 // OSCache.c
 80270050:DCFlushRange
@@ -717,6 +679,7 @@
 80276198:OSRestart
 // more
 // OSThread.c
+80277154:OSGetCurrentThread
 80277ffc:OSSuspendThread
 80278190:OSSleepThread
 8027827c:OSWakeupThread
