@@ -36,14 +36,6 @@ DEVKITPPC = os.environ.get("DEVKITPPC")
 assert DEVKITPPC is not None, "Error: DEVKITPPC environment variable not set"
 CC = os.path.join("$devkitppc", "bin", "powerpc-eabi-gcc")
 
-# Elf2rel
-ELF2REL = os.environ.get("ELF2REL")
-if ELF2REL is None:
-    TTYDTOOLS = os.environ.get("TTYDTOOLS")
-    if TTYDTOOLS is not None:
-        ELF2REL = os.path.join(TTYDTOOLS, "bin", "elf2rel")
-assert ELF2REL is not None, "Error: ELF2REL environment variable not set"
-
 ##############
 # Tool Flags #
 ##############
@@ -125,7 +117,7 @@ LDFLAGS = ' '.join([
     "-lc",
     "-lsysbase",
     "-lgcc",
-    "-r", # Partially link (elf2rel finishes)
+    "-r", # Partially link (pyelf2rel finishes)
     "-e _prolog", # Set entry to _prolog
     "-u _prolog", # Require _prolog to be defined
     "-u _epilog", # Require _epilog to be defined
@@ -163,8 +155,8 @@ def emit_vars(n: Writer):
     n.variable("devkitppc", DEVKITPPC)
     n.variable("cc", CC)
 
-    # Elf2rel
-    n.variable("elf2rel", ELF2REL)
+    # pyelf2rel
+    n.variable("pyelf2rel", "pyelf2rel")
 
     # Tool flags
     n.variable("includes", INCLUDES)
@@ -238,9 +230,9 @@ def emit_rules(n: Writer):
     # Variables to pass in:
     #     lst: lst symbol file input path
     n.rule(
-        "elf2rel",
-        command = "$elf2rel $in -s $lst",
-        description = "elf2rel $out"
+        "pyelf2rel",
+        command = "$pyelf2rel $in $lst",
+        description = "pyelf2rel $out"
     )
     n.newline()
 
@@ -352,7 +344,7 @@ def emit_build(n: Writer, ver: str):
     lst_name = os.path.join("$spm_headers", "linker", f"spm.{lst_ver}.lst")
     n.build(
         rel_name,
-        rule = "elf2rel",
+        rule = "pyelf2rel",
         inputs = elf_name,
         implicit = lst_name,
         variables = { "lst" : lst_name }
