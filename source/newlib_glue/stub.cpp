@@ -16,7 +16,7 @@ void * _sbrk_r (struct _reent *ptr, ptrdiff_t incr)
 
 DUMMY_SYSCALL(__syscall_exit)
 DUMMY_SYSCALL(__syscall_abort)
-DUMMY_SYSCALL(__syscall_assert_func)
+// DUMMY_SYSCALL(__syscall_assert_func)
 DUMMY_SYSCALL(__syscall_clock_gettime)
 DUMMY_SYSCALL(__syscall_clock_settime)
 DUMMY_SYSCALL(__syscall_clock_getres)
