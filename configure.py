@@ -87,6 +87,7 @@ CFLAGS = ' '.join([
     "-Wextra", # Enable even more warnings
     "-Wshadow", # Enable variable shadowing warning
     "-Werror", # Error on warnings
+    "-fmax-errors=3", # Don't print endless errors
 
     "-DUSE_STL", # Tell spm-headers to use C++ stl
 
@@ -269,7 +270,6 @@ def emit_build(n: Writer, ver: str):
     for path in find_files(SRCDIR):
         # Get output name
         ofile = os.path.join("$builddir", ver, path + ".o")
-        ofiles.append(ofile)
 
         # Choose rule based on file extension
         _, ext = os.path.splitext(path)
@@ -296,8 +296,13 @@ def emit_build(n: Writer, ver: str):
                 rule = "as",
                 inputs = path
             )
+        elif ext in (".md",):
+            # Documentation
+            continue
         else:
             assert False, f"Unknown file type {ext} for {path}"
+
+        ofiles.append(ofile)
 
     # Emit asset builds
     with open(ASSETS_YML) as f:
