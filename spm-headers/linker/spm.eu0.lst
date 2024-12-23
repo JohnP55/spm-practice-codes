@@ -684,9 +684,13 @@
 80278190:OSSleepThread
 8027827c:OSWakeupThread
 // more
-// OSTime
+// OSTime.c
 80278370:OSGetTime
 // more
+// OSMutex.c
+80275a50:OSInitMutex
+80275a88:OSLockMutex
+80275b64:OSUnlockMutex
 
 // mtx.a
 // mtx.c
