@@ -47,6 +47,8 @@
 #include "titletextwindow.h"
 #include "xyzwindow.h"
 
+#include <time.h>
+
 namespace mod {
 
 bool gIsDolphin;
@@ -224,6 +226,9 @@ void main()
     HitboxMenu::hitboxPatch();
 
     loadMainPatch();
+
+    time_t t;
+    time(&t);
 
     /*
         Uncomment this if you'd like to load another mod alongside practice codes
