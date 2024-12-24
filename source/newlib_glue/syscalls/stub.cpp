@@ -14,7 +14,7 @@ void * _sbrk_r (struct _reent *ptr, ptrdiff_t incr)
 
 #define DUMMY_SYSCALL(name) void name() { assert(false, "Unsupported syscall " #name "\n"); }
 
-DUMMY_SYSCALL(__syscall_exit)
+// DUMMY_SYSCALL(__syscall_exit)
 // DUMMY_SYSCALL(__syscall_abort)
 // DUMMY_SYSCALL(__syscall_assert_func)
 DUMMY_SYSCALL(__syscall_clock_gettime)
