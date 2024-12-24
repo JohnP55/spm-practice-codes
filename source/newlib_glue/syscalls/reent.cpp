@@ -13,8 +13,12 @@ struct _reent* __syscall_getreent()
     wii::os::OSThread * thread = wii::os::OSGetCurrentThread();
 
     if (reentMap.count(thread) == 0)
-        reentMap[thread] = new struct _reent();
-    
+    {
+        struct _reent * reent = new struct _reent();
+        _REENT_INIT_PTR(reent);
+        reentMap[thread] = reent;
+    }
+
     return reentMap[thread];
 }
 
